@@ -9,9 +9,10 @@ namespace Project.Controllers
     public class StudentsController : Controller
     {
         // GET: Students
+        
         public ActionResult Index()
         {
-            return View();
+            return View("Login");
         }
     }
 }
