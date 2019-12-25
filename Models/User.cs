@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace Project.Models
 {
     public class User
     {
-        public string Name { get; set; }
-        public int ID { get; set; }
-        public string Role { get; set; }
-        public string pass { get; set; }
+        public string name { get; set; }
+        [Key]
+        public string id { get; set; }
+        public string role { get; set; }
+        public string password { get; set; }
         
     }
 }

@@ -1,0 +1,49 @@
+﻿
+@model Project.Models.ViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>LecturerMain</title>
+</head>
+<body>
+    <h1 align="center">Lecturer Portal</h1>
+    <div>
+        Lecturer name: @Session["name"]
+    </div>
+            <table>
+            <tr>
+                <td>Course Name</td>
+                <td>Course id</td>
+                <td>Day</td>
+                <td>Start Time</td>
+                <td>End Time</td>
+                <td>Moed A</td>
+                <td>Moed B</td>
+
+
+            </tr>
+            @foreach (Project.Models.Course obj in Model.ListCource)
+            {
+                <tr>
+                    <td>@obj.name</td>
+                    <td>@obj.course_id</td>
+                    <td>@obj.day</td>
+                    <td>@obj.start_time</td>
+                    <td>@obj.end_time</td>
+                    <td>@obj.moed1</td>
+                    <td>@obj.moed2</td>
+
+                </tr>
+            }
+        </table>
+        <br />
+
+</body>
+</html>

@@ -128,14 +128,17 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdministrationController.cs" />
-    <Compile Include="Controllers\LecturesController.cs" />
+    <Compile Include="Controllers\LecturersController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Dal\PDAL.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\UsersCourses.cs" />
+    <Compile Include="Models\Course.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\ViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -169,13 +172,14 @@
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Login\connect.cshtml" />
+    <Content Include="Views\Students\StudentMain.cshtml" />
+    <Content Include="Views\Lecturers\LecturerMain.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Administration\" />
-    <Folder Include="Views\Lectures\" />
     <Folder Include="Views\Shared\" />
-    <Folder Include="Views\Students\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

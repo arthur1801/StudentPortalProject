@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Project.Models;
 using Project.Dal;
+using System.Text.RegularExpressions;
 
 namespace Project.Controllers
 {
@@ -19,17 +20,28 @@ namespace Project.Controllers
         public ActionResult connect()
         {
             string pass = Request.Form["Password"];
-            string ID = Request.Form["ID"];
-            
-            User logedin = new User
-            {
-                Name = "Arthur",
-                ID = 320582232,
-                Role = "Student",
-                pass = "123456"
+            string ID = Request.Form["user_id"];
+            PDAL DBConnection = new PDAL();
+            List<User> UserList =
+                (from x in DBConnection.Users where x.id == ID && x.password == pass select x).ToList<User>();
 
-            };
-            return View("Login");
+
+            try
+            {
+                Session["id"] = Regex.Replace(UserList[0].id, " ", ""); 
+                Session["role"] = Regex.Replace(UserList[0].role, " ", "");
+                Session["name"] = UserList[0].name;
+            }
+            catch (Exception) { return View("Login"); }
+
+            if (Session["role"].ToString()== "1")
+                return RedirectToAction("StudentMain","Students");
+            else if (Session["role"].ToString() == "2")
+                return RedirectToAction("LecturerMain", "Lecturers");
+            else if (Session["role"].ToString() == "3")
+                return View("Login");
+            else
+                return View("Login");
         }
 
     }

@@ -13,7 +13,12 @@ namespace Project.Dal
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<User>().ToTable("tblUser");
+            modelBuilder.Entity<Course>().ToTable("tblCourses");
+            modelBuilder.Entity<UsersCourses>().ToTable("tblUsersCourses");
         }
         public DbSet<User> Users { get; set; }
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<UsersCourses> UsersCoursess { get; set; }
+
     }
 }
