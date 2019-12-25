@@ -12,38 +12,70 @@
     <meta name="viewport" content="width=device-width" />
     <title>LecturerMain</title>
 </head>
+
 <body>
     <h1 align="center">Lecturer Portal</h1>
     <div>
         Lecturer name: @Session["name"]
     </div>
-            <table>
-            <tr>
-                <td>Course Name</td>
-                <td>Course id</td>
-                <td>Day</td>
-                <td>Start Time</td>
-                <td>End Time</td>
-                <td>Moed A</td>
-                <td>Moed B</td>
+    <table>
+        <tr>
+            <td>Course Name</td>
+            <td>Course id</td>
+            <td>Day</td>
+            <td>Start Time</td>
+            <td>End Time</td>
+            <td>Moed A</td>
+            <td>Moed B</td>
 
+
+        </tr>
+        @foreach (Project.Models.Course obj in Model.ListCource)
+        {
+            <tr>
+                <td>@obj.name</td>
+                <td>@obj.course_id</td>
+                <td>@obj.day</td>
+                <td>@obj.start_time</td>
+                <td>@obj.end_time</td>
+                <td>@obj.moed1</td>
+                <td>@obj.moed2</td>
 
             </tr>
-            @foreach (Project.Models.Course obj in Model.ListCource)
-            {
-                <tr>
-                    <td>@obj.name</td>
-                    <td>@obj.course_id</td>
-                    <td>@obj.day</td>
-                    <td>@obj.start_time</td>
-                    <td>@obj.end_time</td>
-                    <td>@obj.moed1</td>
-                    <td>@obj.moed2</td>
+        }
+    </table>
+    <br />
+    <form action="ShowStudentList" method="post">
+        Student list:
+        <input id="Course_id" name="Course_id" type="text" placeholder="Course id" />
+        <input id="Button1" type="submit" value="Show" />
+    </form>
+    <div id="Status"></div>
+    <table id="StudentList">
+        <tr>
+            <td>Student ID</td>
+            <td>Moed 1 grade</td>
+            <td>Moed 2 grade </td>
+        </tr>
+    </table>
 
-                </tr>
+    
+    <script type="text/javascript">
+        $("Status").text("sdafdshgdsgksd;lkgf;lsdfkgf;ldskl;g");
+        $.get("GetStudentListByJSON", null, BindData);
+        function BindData(Students) {
+            var tbl = $("#StudentList");
+            for (i = 0; i < Students.lenght; i++) {
+                var newRow = "<tr>" +
+                    "<td>" + Students[i].id + "</td>" +
+                    "<td>" + Students[i].moed1 + "</td>" +
+                    "<td>" + Students[i].moed2 + "</td>" +
+                    "</tr>"
+                tbl.append(newRow);
             }
-        </table>
-        <br />
+        }
+
+    </script>
 
 </body>
 </html>

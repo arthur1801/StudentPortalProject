@@ -26,5 +26,23 @@ namespace Project.Controllers
             vm.ListCource = List_Courses;
             return View("LecturerMain", vm);
         }
+
+        public ActionResult ShowStudentList()
+        {
+            Session["Course_id"] = Request.Form["Course_id"];
+            return LecturerMain();
+        }
+
+        public ActionResult GetStudentListByJSON()
+        {
+            
+           int id = Convert.ToInt32(Session["Course_id"]);
+            PDAL DBConnection = new PDAL();
+            List<UsersCourses> Students =
+                (from x in DBConnection.UsersCoursess where x.course==id select x).ToList<UsersCourses>();
+            return Json(Students,JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }
