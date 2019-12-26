@@ -36,7 +36,7 @@ namespace Project.Controllers
         public ActionResult GetStudentListByJSON()
         {
             
-           int id = Convert.ToInt32(Session["Course_id"]);
+            int id = Convert.ToInt32(Session["Course_id"]);
             PDAL DBConnection = new PDAL();
             List<UsersCourses> Students =
                 (from x in DBConnection.UsersCoursess where x.course==id select x).ToList<UsersCourses>();

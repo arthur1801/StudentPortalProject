@@ -32,16 +32,16 @@ namespace Project.Controllers
                 Session["role"] = Regex.Replace(UserList[0].role, " ", "");
                 Session["name"] = UserList[0].name;
             }
-            catch (Exception) { return View("Login"); }
+            catch (Exception) { return Redirect("~"); }
 
             if (Session["role"].ToString()== "1")
                 return RedirectToAction("StudentMain","Students");
             else if (Session["role"].ToString() == "2")
                 return RedirectToAction("LecturerMain", "Lecturers");
             else if (Session["role"].ToString() == "3")
-                return View("Login");
+                return RedirectToAction("AdminMain", "Administration");
             else
-                return View("Login");
+                return Redirect("~");
         }
 
     }
