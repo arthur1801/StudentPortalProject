@@ -25,7 +25,12 @@ namespace Project.Controllers
             List<User> UserList =
                 (from x in DBConnection.Users where x.id == ID && x.password == pass select x).ToList<User>();
 
-
+            if (UserList.Count() == 0)
+            {
+                Session["Alert"] = "Wrong Credantials,Try Again!";
+                return Redirect("~");
+            }
+            Session["Alert"] = "";
             try
             {
                 Session["id"] = Regex.Replace(UserList[0].id, " ", ""); 

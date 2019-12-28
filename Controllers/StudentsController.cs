@@ -53,5 +53,15 @@ namespace Project.Controllers
             vm.List_users_courses = List_usersCourses;
             return View("StudentMain", vm);
         }
+
+
+        public ActionResult logout()
+        {
+            Session["name"] = "";
+            Session["ID"] = "";
+            Session["Course_id"] = "";
+            Session["role"] = "0";
+            return Redirect("~");
+        }
     }
 }

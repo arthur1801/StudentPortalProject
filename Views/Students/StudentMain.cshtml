@@ -22,59 +22,64 @@
 </head>
 
 <body>
-    <h1 align="center">Student Portal</h1>
-    <div>
-        Student name: @Session["name"]
-        <br />
-
-        Courses:
-        <br />
-        <table class="table table-hover">
-            <tr>
-                <td>Course Name</td>
-                <td>Course id</td>
-                <td>Day</td>
-                <td>Start Time</td>
-                <td>End Time</td>
-                <td>Moed A</td>
-                <td>Moed B</td>
-
-
-            </tr>
-            @foreach (Project.Models.Course obj in Model.ListCource)
-            {
-                <tr>
-                    <td>@obj.name</td>
-                    <td>@obj.course_id</td>
-                    <td>@obj.day</td>
-                    <td>@obj.start_time</td>
-                    <td>@obj.end_time</td>
-                    <td>@obj.moed1</td>
-                    <td>@obj.moed2</td>
-
-                </tr>
-            }
-        </table>
-        <br />
-        <table class="table table-hover">
-            <tr>
-                <td>Course ID</td>
-                <td>Moed A grade</td>
-                <td>Moed B grade</td>
-            </tr>
-            @foreach (Project.Models.UsersCourses obj in Model.List_users_courses)
-            {
-                <tr>
-                    <td>@obj.course</td>
-                    <td>@obj.moed1</td>
-                    <td>@obj.moed2</td>
-
-                </tr>
-            }
-        </table>
-        <br />
-
-
+    <button type="button" class="btn btn-outline-primary" style="float: right;margin-right: 1em; margin-top: 1em;" onclick="location.href = 'logout';">Logout</button>
+    <br />
+    <div class="container" style="margin-top: 2em;">
+        <h1 class="display-4">Student Portal</h1>
+        <hr class="my-4">
+        <p class="lead">Name: @Session["name"]</p>
+        <p class="lead">ID: @Session["ID"]</p>
     </div>
-    </body>
+
+    <table class="table table-hover" style="width: 80%;" align="center">
+        <tr class="table-active">
+            <td>Course Name</td>
+            <td>Course id</td>
+            <td>Day</td>
+            <td>Start Time</td>
+            <td>End Time</td>
+            <td>Class moed A</td>
+            <td>Moed A</td>
+            <td>Class moed B</td>
+            <td>Moed B</td>
+
+
+        </tr>
+        @foreach (Project.Models.Course obj in Model.ListCource)
+        {
+            <tr>
+                <td>@obj.name</td>
+                <td>@obj.course_id</td>
+                <td>@obj.day</td>
+                <td>@obj.start_time</td>
+                <td>@obj.end_time</td>
+                <td>@obj.class1</td>
+                <td>@obj.moed1</td>
+                <td>@obj.class2</td>
+                <td>@obj.moed2</td>
+
+            </tr>
+        }
+    </table>
+    <br />
+    <table class="table table-hover" style="width: 80%;" align="center">
+        <tr class="table-active">
+            <td>Course ID</td>
+            <td>Moed A grade</td>
+            <td>Moed B grade</td>
+            <td>Final Grade</td>
+        </tr>
+        @foreach (Project.Models.UsersCourses obj in Model.List_users_courses)
+        {
+            <tr>
+                <td>@obj.course</td>
+                <td>@obj.moed1</td>
+                <td>@obj.moed2</td>
+                <td>@obj.final</td>
+            </tr>
+        }
+    </table>
+    <br />
+
+</body>
 </html>

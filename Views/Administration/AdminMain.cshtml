@@ -1,4 +1,5 @@
-﻿@model Project.Models.ViewModel
+﻿
+@model Project.Models.ViewModel
 
 @{
     Layout = null;
@@ -20,18 +21,29 @@
 </head>
 
 <body>
-    <h1 align="center">Lecturer Portal</h1>
-    <div>
-        Lecturer name: @Session["name"]
+    <button type="button" class="btn btn-outline-primary" style="float: right;margin-right: 1em; margin-top: 1em;" onclick="location.href = 'logout';">Logout</button>
+    <br />
+    <div class="container" style="margin-top: 2em;">
+        <h1 class="display-4">Admin Portal</h1>
+        <hr class="my-4">
+        <p class="lead">Name: @Session["name"]</p>
+        <p class="lead">ID: @Session["ID"]</p>
     </div>
-    <table class="table table-hover">
-        <tr>
+
+
+
+
+
+    <table class="table table-hover" style="width: 80%;" align="center">
+        <tr class="table-active">
             <td>Course Name</td>
             <td>Course id</td>
             <td>Day</td>
             <td>Start Time</td>
             <td>End Time</td>
+            <td>Class moed A</td>
             <td>Moed A</td>
+            <td>Class moed B</td>
             <td>Moed B</td>
 
 
@@ -44,26 +56,142 @@
                 <td>@obj.day</td>
                 <td>@obj.start_time</td>
                 <td>@obj.end_time</td>
+                <td>@obj.class1</td>
                 <td>@obj.moed1</td>
+                <td>@obj.class2</td>
                 <td>@obj.moed2</td>
 
             </tr>
         }
     </table>
     <br />
-    <form action="ShowStudentList" method="post">
+
+
+    <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center" style="margin-left: 12%;">
+                    <form action="AddStudentToCource" method="post">
+                        <h4 style="margin-bottom: 1em;">Change Student Grade</h4>
+                        <div class="form-group row">
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Student ID</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="Student_id" class="form-control" id="inputPassword3">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Course ID</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="Course_id" class="form-control" id="inputPassword3">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Grade</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="Grade" class="form-control" id="inputPassword3">
+                            </div>
+                        </div>
+                        <fieldset class="form-group">
+                            <div class="row">
+                                <div class="col-sm-10">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gridRadios1" id="gridRadios1" value="option1" checked>
+                                        <label class="form-check-label" for="gridRadios1">
+                                            Moed A
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gridRadios1" id="gridRadios1" value="option2">
+                                        <label class="form-check-label" for="gridRadios2">
+                                            Moed B
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gridRadios1" id="gridRadios1" value="option3">
+                                        <label class="form-check-label" for="gridRadios2">
+                                            Final
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </fieldset>
+                        <div class="form-group row">
+                            <div class="col-sm-10">
+                                <button type="submit" class="btn btn-primary">Change</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addstudenttocourse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center" style="margin-left: 12%;">
+                    <form action="ChangeStudentGrade" method="post">
+                        <h4 style="margin-bottom: 1em;">Add student to cource</h4>
+                        <div class="form-group row">
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Student ID</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="Student_id" class="form-control" id="inputPassword3">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Course ID</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="Course_id" class="form-control" id="inputPassword3">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-10">
+                                <button type="submit" class="btn btn-primary">Add</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <div class="text-center" style="margin-bottom: 1em;">
+        <a href="" class="btn btn-primary" data-toggle="modal" data-target="#addstudenttocourse">
+            Add student to course
+        </a>
+    </div>
+
+    <div class="text-center">
+        <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modalLoginForm">
+            Change student grade
+        </a>
+    </div>
+
+    <form action="ShowStudentList" method="post" style="margin-left: 10%">
         Student list:
-        <input id="Course_id" name="Course_id" type="text" placeholder="Course id" />
-        <input id="Button1" type="submit" value="Show" />
+        <input id="Course_id" name="Course_id" style="width: 5%; margin-bottom: 2em;" type="text" placeholder="Course id" />
+        <input id="Button1" type="submit" class="btn btn-primary" value="Show" />
     </form>
     <div id="Status"></div>
 
 
-    <table id="StudentList" class="table table-hover">
-        <tr>
-            <td>Student ID</td>
-            <td>Moed 1 grade</td>
-            <td>Moed 2 grade </td>
+    <table id="StudentList" class="table table-hover" style="width: 80%;" align="center">
+        <tr class="table-active">
+            <td>Course ID</td>
+            <td>Moed A grade</td>
+            <td>Moed B grade</td>
+            <td>Final Grade</td>
         </tr>
     </table>
 
@@ -75,12 +203,13 @@
         function BindData(Students) {
             var tbl = $("#StudentList");
             var length = 0;
-            for(var k in Students) length++;
+            for (var k in Students) length++;
             for (i = 0; i < length; i++) {
                 var newRow = "<tr>" +
                     "<td>" + Students[i].id + "</td>" +
                     "<td>" + Students[i].moed1 + "</td>" +
                     "<td>" + Students[i].moed2 + "</td>" +
+                    "<td>" + Students[i].final + "</td>" +
                     "</tr>";
                 tbl.append(newRow);
             }

@@ -16,22 +16,16 @@
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-    
+
 
 </head>
 <body>
 
-    <div class="row justify-content-center">
-        <h1 class="text-white">'</h1>
+    <div class="row justify-content-center" style="margin-top: 4em;">
+        <img src="~/img/SCE.png" class="img-fluid" style="position: absolute;pointer-events: none;">
     </div>
 
-    <div class="row justify-content-center">
-        <img src="~/img/SCE.png">
-    </div>
-    <div class="row justify-content-center">
-        <h3 class="text-white">'</h3>
-    </div>
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" style="margin-top: 10%;">
         <form action="Login/connect" method="post">
             <div class="form-group">
                 <label for="exampleInputEmail1">ID</label>
@@ -44,11 +38,23 @@
             <button type="submit" class="btn btn-primary">Login</button>
         </form>
     </div>
-      
+
+    <div class="row justify-content-center" style="margin-top: 4em;">
+        <div class="alert alert-danger" id="Alert" role="alert" style="visibility :hidden;width: 15%;">
+            @Session["Alert"]
+        </div>
+    </div>
+
     <img src="~/img/footer.png" class="img-fluid" style="align-self: center;vertical-align: bottom; position: absolute;bottom: 0; pointer-events: none;">
 
+    @if ((string)Session["Alert"] == "Wrong Credantials,Try Again!")
+    {
+        <script type="text/javascript">
+            document.getElementById("Alert").style.visibility = "visible";
+        </script>
+        Session["Alert"] = "";
+    }
 
 </body>
-
 
 </html>

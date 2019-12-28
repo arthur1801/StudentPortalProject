@@ -18,6 +18,8 @@ namespace Project.Models
         public int moed1 { get; set; }
         public int moed2 { get; set; }
 
+        public int final { get; set; }
+
 
     }
 }

@@ -19,6 +19,8 @@ namespace Project.Models
         public DateTime moed1 { get; set; }
         public DateTime moed2 { get; set; }
 
+        public string class1 { get; set; }
+        public string class2 { get; set; }
         public string name { get; set; }
 
     }   
