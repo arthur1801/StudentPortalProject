@@ -38,6 +38,7 @@
         <tr class="table-active">
             <td>Course Name</td>
             <td>Course id</td>
+            <td>Course class</td>
             <td>Day</td>
             <td>Start Time</td>
             <td>End Time</td>
@@ -53,6 +54,7 @@
             <tr>
                 <td>@obj.name</td>
                 <td>@obj.course_id</td>
+                <td>@obj.Lecture_class</td>
                 <td>@obj.day</td>
                 <td>@obj.start_time</td>
                 <td>@obj.end_time</td>
@@ -136,7 +138,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header text-center" style="margin-left: 12%;">
-                    <form action="ChangeStudentGrade" method="post">
+                    <form action="AddStudentToCource" method="post">
                         <h4 style="margin-bottom: 1em;">Add student to cource</h4>
                         <div class="form-group row">
                             <label for="inputPassword3" class="col-sm-2 col-form-label">Student ID</label>
@@ -161,10 +163,54 @@
         </div>
     </div>
 
+    <div class="modal fade" id="ChangeCourseTime" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center" style="margin-left: 12%;">
+                    <form action="ChangeCourseTime" method="post">
+                        <h4 style="margin-bottom: 1em;">Change course time</h4>
+                        <div class="form-group row">
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Course ID</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="Course_id" class="form-control" id="inputPassword3">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Day</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="day" class="form-control"placeholder="i.e.: Sunday" id="inputPassword3">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Start</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="Start" placeholder="HH:mm" class="form-control" id="inputPassword3">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">End</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="End" placeholder="HH:mm" class="form-control" id="inputPassword3">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-10">
+                                <button type="submit" class="btn btn-primary">Add</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
-
-
+    <div class="text-center" style="margin-bottom: 1em;">
+        <a href="" class="btn btn-primary" data-toggle="modal" data-target="#ChangeCourseTime">
+            Change course time
+        </a>
+    </div>
 
     <div class="text-center" style="margin-bottom: 1em;">
         <a href="" class="btn btn-primary" data-toggle="modal" data-target="#addstudenttocourse">
@@ -216,6 +262,60 @@
         }
 
     </script>
+    @if ((string)Session["Alert"] == "User id or course id is wrong.")
+    {
 
+        <script type="text/javascript">
+            alert("User id or course id is wrong.");
+        </script>
+        Session["Alert"] = "";
+    }
+    @if ((string)Session["Alert"] == "The user is not student.")
+    {
+
+        <script type="text/javascript">
+            alert("The user is not student.");
+        </script>
+        Session["Alert"] = "";
+    }
+    @if ((string)Session["Alert"] == "Course overlap with another course.")
+    {
+
+        <script type="text/javascript">
+            alert("Course overlap with another course.");
+        </script>
+        Session["Alert"] = "";
+    }    
+    @if ((string)Session["Alert"] == "No such course.")
+    {
+
+        <script type="text/javascript">
+            alert("No such course.");
+        </script>
+        Session["Alert"] = "";
+    }    
+    @if ((string)Session["Alert"] == "Bad time format.")
+    {
+
+        <script type="text/javascript">
+            alert("Bad time format.");
+        </script>
+        Session["Alert"] = "";
+    }    @if ((string)Session["Alert"] == "Time overlaps other course.")
+    {
+
+        <script type="text/javascript">
+            alert("Time overlaps other course.");
+        </script>
+        Session["Alert"] = "";
+    }
+    @if ((string)Session["Alert"] == "Student is alredy tacking the course or no such student.")
+    {
+
+        <script type="text/javascript">
+            alert("Student is alredy tacking the course or no such student.");
+        </script>
+        Session["Alert"] = "";
+    }
 </body>
 </html>

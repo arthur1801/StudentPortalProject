@@ -21,6 +21,8 @@ namespace Project.Models
 
         public string class1 { get; set; }
         public string class2 { get; set; }
+
+        public string Lecture_class { get; set; }
         public string name { get; set; }
 
     }   
