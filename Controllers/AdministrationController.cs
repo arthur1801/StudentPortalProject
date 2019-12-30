@@ -2,6 +2,7 @@
 using Project.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
@@ -129,6 +130,7 @@ namespace Project.Controllers
                 course_id = Convert.ToInt32(Request.Form["Course_id"]);
             }catch(Exception a)
             {
+                a.GetType();
                 Session["Alert"] = "No such course.";
                 return Redirect("~/Administration/AdminMain");
             }
@@ -171,12 +173,12 @@ namespace Project.Controllers
             {
                 start = TimeSpan.Parse(Request.Form["start"]);
                 end = TimeSpan.Parse(Request.Form["end"]);
-                if (start >= end) { Session["Alert"] = "Bad time format."; ; return Redirect("~/Administration/AdminMain"); }
+                if (start >= end) { Session["Alert"] = "Bad time format.";  return Redirect("~/Administration/AdminMain"); }
             }
             catch (Exception a)
             {
-                a = null;
-                Session["Alert"] = "Bad time format."; ; return Redirect("~/Administration/AdminMain");
+                a.GetType();
+                Session["Alert"] = "Bad time format.";  return Redirect("~/Administration/AdminMain");
             }
             int Course_id = Convert.ToInt32(Request.Form["Course_id"]);
             PDAL DBconnection = new PDAL();
@@ -199,6 +201,29 @@ namespace Project.Controllers
             c.end_time = end;
             c.start_time = start;
             DBconnection.SaveChanges();
+            return Redirect("~/Administration/AdminMain");
+        }
+
+
+        public ActionResult ChangeMoedDate()
+        {
+
+            try
+            {
+                string date_time = Request.Form["Date"] + Request.Form["Time"];
+                int cource_id = Convert.ToInt32(Request.Form["Course_id"]);
+                DateTime dt = DateTime.ParseExact(date_time, "dd-MM-yyyyHH:mm", CultureInfo.InvariantCulture);
+                PDAL DBconnection = new PDAL();
+                Course a = DBconnection.Courses.Find(cource_id);
+                if (a == null) { Session["Alert"] = "No such course."; return Redirect("~/Administration/AdminMain"); }
+                if(Request.Form["gridRadios1"]== "option1") { a.moed1 = dt; }
+                if(Request.Form["gridRadios1"]== "option2") { a.moed2 = dt; }
+                DBconnection.SaveChanges();
+            }
+            catch
+            {
+                Session["Alert"] = "Bad time or date format.";
+            }
             return Redirect("~/Administration/AdminMain");
         }
     }

@@ -21,7 +21,35 @@
 </head>
 
 <body>
-    <button type="button" class="btn btn-outline-primary" style="float: right;margin-right: 1em; margin-top: 1em;" onclick="location.href = 'logout';">Logout</button>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a href="" class="btn btn-primary" style="margin-right:0.5em;" data-toggle="modal" data-target="#ChangeMoedDate">
+                    Change exam date
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="" class="btn btn-primary" style="margin-right:0.5em;" data-toggle="modal" data-target="#ChangeCourseTime">
+                    Change course time
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="" class="btn btn-primary" style="margin-right:0.5em;" data-toggle="modal" data-target="#modalLoginForm">
+                    Change student grade
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="" class="btn btn-primary" style="margin-right:0.5em;" data-toggle="modal" data-target="#addstudenttocourse">
+                    Add student to course
+                </a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <button type="button" class="btn btn-outline-primary " style="" onclick="location.href = 'logout';">Logout</button>
+        </form>
+    </nav>
+
+
     <br />
     <div class="container" style="margin-top: 2em;">
         <h1 class="display-4">Admin Portal</h1>
@@ -126,9 +154,6 @@
                         </div>
                     </form>
                 </div>
-
-
-
             </div>
         </div>
     </div>
@@ -179,7 +204,7 @@
                         <div class="form-group row">
                             <label for="inputPassword3" class="col-sm-2 col-form-label">Day</label>
                             <div class="col-sm-10">
-                                <input type="text" name="day" class="form-control"placeholder="i.e.: Sunday" id="inputPassword3">
+                                <input type="text" name="day" class="form-control" placeholder="i.e.: Sunday" id="inputPassword3">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -204,25 +229,56 @@
             </div>
         </div>
     </div>
-
-
-    <div class="text-center" style="margin-bottom: 1em;">
-        <a href="" class="btn btn-primary" data-toggle="modal" data-target="#ChangeCourseTime">
-            Change course time
-        </a>
+    <div class="modal fade" id="ChangeMoedDate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center" style="margin-left: 12%;">
+                    <form action="ChangeMoedDate" method="post">
+                        <h4 style="margin-bottom: 1em;">Change Moed Date</h4>
+                        <div class="form-group row">
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Course ID</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="Course_id" class="form-control" id="inputPassword3">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Date</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="Date" class="form-control" placeholder="dd-MM-yyyy" id="inputPassword3">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="inputPassword3" class="col-sm-2 col-form-label">Time</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="Time" placeholder="HH:mm" class="form-control" id="inputPassword3">
+                            </div>
+                        </div>
+                        <div class="col-sm-10">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="gridRadios1" id="gridRadios1" value="option1" checked>
+                                <label class="form-check-label" for="gridRadios1">
+                                    Moed A
+                                </label>
+                            </div>
+                            <div class="form-check" style="margin-bottom: 1em;">
+                                <input class="form-check-input" type="radio" name="gridRadios1" id="gridRadios1" value="option2">
+                                <label class="form-check-label" for="gridRadios2">
+                                    Moed B
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-10">
+                                <button type="submit" class="btn btn-primary">Change</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="text-center" style="margin-bottom: 1em;">
-        <a href="" class="btn btn-primary" data-toggle="modal" data-target="#addstudenttocourse">
-            Add student to course
-        </a>
-    </div>
-
-    <div class="text-center">
-        <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modalLoginForm">
-            Change student grade
-        </a>
-    </div>
 
     <form action="ShowStudentList" method="post" style="margin-left: 10%">
         Student list:
@@ -285,7 +341,7 @@
             alert("Course overlap with another course.");
         </script>
         Session["Alert"] = "";
-    }    
+    }
     @if ((string)Session["Alert"] == "No such course.")
     {
 
@@ -293,7 +349,7 @@
             alert("No such course.");
         </script>
         Session["Alert"] = "";
-    }    
+    }
     @if ((string)Session["Alert"] == "Bad time format.")
     {
 
@@ -317,11 +373,19 @@
         </script>
         Session["Alert"] = "";
     }
-        @if ((string)Session["Alert"] == "No such course.")
+    @if ((string)Session["Alert"] == "No such course.")
     {
 
         <script type="text/javascript">
             alert("No such course.");
+        </script>
+        Session["Alert"] = "";
+    }
+    @if ((string)Session["Alert"] == "Bad time or date format.")
+    {
+
+        <script type="text/javascript">
+            alert("Bad time or date format.");
         </script>
         Session["Alert"] = "";
     }
