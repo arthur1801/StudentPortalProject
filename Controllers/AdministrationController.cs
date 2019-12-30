@@ -123,7 +123,17 @@ namespace Project.Controllers
 
         public ActionResult AddStudentToCource()
         {
-            int course_id = Convert.ToInt32(Request.Form["Course_id"]);
+            int course_id;
+            try
+            {
+                course_id = Convert.ToInt32(Request.Form["Course_id"]);
+            }catch(Exception a)
+            {
+                Session["Alert"] = "No such course.";
+                return Redirect("~/Administration/AdminMain");
+            }
+
+
             string Student_id = (string)Request.Form["Student_id"];
             PDAL DBconnection = new PDAL();
             UsersCourses Student = DBconnection.UsersCoursess.Find(Student_id, course_id);

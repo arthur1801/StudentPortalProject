@@ -36,6 +36,7 @@ namespace Project.Controllers
                 Session["id"] = Regex.Replace(UserList[0].id, " ", ""); 
                 Session["role"] = Regex.Replace(UserList[0].role, " ", "");
                 Session["name"] = UserList[0].name;
+                Session["Course_id"] = "-1";
             }
             catch (Exception) { return Redirect("~"); }
 

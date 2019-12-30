@@ -317,5 +317,13 @@
         </script>
         Session["Alert"] = "";
     }
+        @if ((string)Session["Alert"] == "No such course.")
+    {
+
+        <script type="text/javascript">
+            alert("No such course.");
+        </script>
+        Session["Alert"] = "";
+    }
 </body>
 </html>
